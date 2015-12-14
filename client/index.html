@@ -14,22 +14,21 @@
 
 
     <div class="row">
-        <ul class="small-3 columns">
-             <!--{{partners.countryList}}-->
-            <li class="" >
-               
-                
-                
-                
-                <select name="country" id="" ng-model="selectedCountry">
-                    <option ng-repeat="country in partners.countryList" value="{{country}}">{{country}}</option>
-                    
-                </select>
-            </li>
+        <div class="small-3 columns">
+            <form>
+                <ul class="side-nav">
+
+                    <li class="row" ng-repeat="country in partners.countryList">
+                        <input type="radio" name="country" value="{{country}}"  ng-model="partners.favoriteCountry" ng-change="fav(this)"> 
+                        <input type="submit" name="{{country}}" value="{{country}}" class="button" ng-model="partners.selectedCountry" ng-click="selectCountry(this)" /> </imput>
+                    </li>
+
+        </div>
+        </form>
         </ul>
 
-        <ul class="small-9 columns">
-            <li class="panel" ng-repeat="partner in partners.data | filter: selectedCountry">
+        <ul class="small-8 columns">
+            <li class="panel" ng-repeat="partner in partners.data | filter: partners.selectedCountry">
                 <strong>Partner Name:</strong> {{partner.name}}
 
                 <ul>
@@ -63,5 +62,7 @@
 <script type="text/javascript" src="components/foundation/js/foundation.min.js"></script>
 <script type="text/javascript" src="components/angular/angular.js"></script>
 <script type="text/javascript" src="js/lodash/lodash.js"></script>
+<script type="text/javascript" src="js/amplify/lib/amplify.js"></script>
 <script type="text/javascript" src="js/app.js"></script>
+
 </html>
