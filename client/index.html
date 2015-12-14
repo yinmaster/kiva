@@ -1,76 +1,67 @@
 <html ng-app="app">
+
 <head>
-  <title></title>
-  <link rel="stylesheet" href="css/app.css" type="text/css" />
-  
-  <style type="text/css">
-  </style>
-  
+    <title></title>
+    <link rel="stylesheet" href="css/app.css" type="text/css" />
+
+    <style type="text/css">
+
+    </style>
+
 </head>
-<body ng-controller="PartnersCtrl as partner">
-	
-{{1+4}}
-    
-  
+
+<body ng-controller="PartnersCtrl as partners" ng-init="parentIndex = $index">
 
 
-      
+    <div class="row">
+        <ul class="small-3 columns">
+             <!--{{partners.countryList}}-->
+            <li class="" >
+               
+                
+                
+                
+                <select name="country" id="" ng-model="selectedCountry">
+                    <option ng-repeat="country in partners.countryList" value="{{country}}">{{country}}</option>
+                    
+                </select>
+            </li>
+        </ul>
 
-  
+        <ul class="small-9 columns">
+            <li class="panel" ng-repeat="partner in partners.data | filter: selectedCountry">
+                <strong>Partner Name:</strong> {{partner.name}}
 
-  
+                <ul>
+                    Countries of Opporation:
+                    <li ng-repeat="country in partner.countries">
+                        {{ country.name }}
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+
+
+    </div>
+
+
+
+
+    <!--{{partner.data}}-->
+
+
+
+
+
+
+
+
 </body>
 
 <script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="components/bxslider/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="components/foundation/js/foundation.min.js"></script>
 <script type="text/javascript" src="components/angular/angular.js"></script>
-<script type="text/javascript">
- 
- 
- function Get_journal_entries(){
-   
-   
- }
- 
-   function GET_partners($http, $q) {
-    var self = this;
-    var cNum = 1;
-    
-    self.selectedArray = [];
-    self.partnerList = {cl:[]};
-    self.getPartnersP = $q.defer();
-    
-    self.getPartners = function() {
-      $http.get('https://api.kivaws.org/v1/partners.json').
-      success(function(data, status, headers, config) {
-        self.getPartnersP.resolve(data);
-      }).
-      error(function(data, status, headers, config) {});
-    };
-    return self;
-  }
- 
-function PartnersCtrl(GET_partners){
-    GET_partners.getPartners();
-    GET_partners.getPartnersP.promise.then(function(data){
-        alert(data)
-    })
-}
-
- 
- 
- angular.module('app', [])
- .service('Get_journal_entries', [Get_journal_entries])
- .service('GET_partners', ['$http', '$q',GET_partners])
- .controller('PartnersCtrl', ['GET_partners', PartnersCtrl]);
-  	
-  	
-  	
-  $(document).ready(function(){
-    $(document).foundation();
-  });
-  
-  
-</script>
+<script type="text/javascript" src="js/lodash/lodash.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
 </html>
