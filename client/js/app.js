@@ -1,9 +1,11 @@
+   
+    // GET PARTNERS FROM API  
    function GET_partners($http, $q) {
        var self = this;
-       self.partnerList = []
        self.getPartnersP = $q.defer();
 
        self.getPartners = function() {
+            // API REQUEST   
            $http.get('https://api.kivaws.org/v1/partners.json').
            success(function(data, status, headers, config) {
                self.getPartnersP.resolve(data.partners);
@@ -17,6 +19,7 @@
        var self = this;
       self.data;
       self.countryList = [];
+      // CHECK IF COUNTRY HAS FAVIORTE IN LOCAL STORAGE AND SET IF FAVORITE EXISITS 
       if(amplify.store("country").country){
          self.selectedCountry = amplify.store("country").country; 
          self.favoriteCountry = amplify.store("country").country;  
@@ -25,26 +28,24 @@
          self.favoriteCountry;
       }
       
-    
+        // SET FAVORITE AND SAVE TO LOCAL STORAGE
        $scope.fav = function(value){
          self.favoriteCountry = value.country
          self.selectedCountry = value.country;
          amplify.store("country",{'country' : value.country});
        }
        
+        // SELECT COUNTRY WITH BUTTON
        $scope.selectCountry = function(value){
            self.selectedCountry = value.country;
        }
-       
-       self.setCountry = function(){
-          // self.selectedCountry =
-       }
-       
-       
+
+        //PROMISE TO RUN WHEN DATA IS RETURNED FROM THE API
        GET_partners.getPartners();
        GET_partners.getPartnersP.promise.then(function(data) {
            self.data = data;
 
+            //LOOP THROUGH AVAIBLE COUNTRIES AND REMOVE DUPS
            function getCountries() {
                var countries = []
                for (var i = 0; i < self.data.length; i++) {
@@ -62,13 +63,13 @@
    }
 
 
-
+// INI ANGULAR APP SERVICE AND CONTROLLER
        angular.module('app', [])
            .service('GET_partners', ['$http', '$q', GET_partners])
            .controller('PartnersCtrl', ['GET_partners', '$scope', PartnersCtrl]);
 
 
-
+// INI FOUNDATION
        $(document).ready(function() {
            $(document).foundation();
        });

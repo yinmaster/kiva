@@ -11,26 +11,30 @@
 </head>
 
 <body ng-controller="PartnersCtrl as partners" ng-init="parentIndex = $index">
-
-
     <div class="row">
         <div class="small-3 columns">
+            <!--Country Selectors-->
             <form>
                 <ul class="side-nav">
 
                     <li class="row" ng-repeat="country in partners.countryList">
-                        <input type="radio" name="country" value="{{country}}"  ng-model="partners.favoriteCountry" ng-change="fav(this)"> 
-                        <input type="submit" name="{{country}}" value="{{country}}" class="button" ng-model="partners.selectedCountry" ng-click="selectCountry(this)" /> </imput>
+                        <!--Select Favorite Country-->
+                        <label for="{{country}}">
+                            Fav:
+                            <input type="radio" id="{{country}}" name="country" value="{{country}}" ng-model="partners.favoriteCountry" ng-change="fav(this)">
+                        </label>
+                        <!--Select Country-->
+                        <input type="submit" name="{{country}}" value="{{country}}" class="button" ng-model="partners.selectedCountry" ng-click="selectCountry(this)" />
+                      
+                          
                     </li>
-
         </div>
         </form>
         </ul>
-
+        <!-- List of Partners-->
         <ul class="small-8 columns">
-            <li class="panel" ng-repeat="partner in partners.data | filter: partners.selectedCountry">
+            <li class="panel" ng-repeat="partner in partners.data | filter: partners.selectedCountry : true">
                 <strong>Partner Name:</strong> {{partner.name}}
-
                 <ul>
                     Countries of Opporation:
                     <li ng-repeat="country in partner.countries">
@@ -39,23 +43,7 @@
                 </ul>
             </li>
         </ul>
-
-
-
     </div>
-
-
-
-
-    <!--{{partner.data}}-->
-
-
-
-
-
-
-
-
 </body>
 
 <script type="text/javascript" src="js/jquery.min.js"></script>
