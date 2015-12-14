@@ -1,0 +1,68 @@
+<html ng-app="app">
+<head>
+  <title></title>
+  <link rel="stylesheet" href="css/app.css" type="text/css" />
+  
+  <style type="text/css">
+  </style>
+  
+</head>
+<body>
+	
+{{1+4}}
+    
+  
+
+
+      
+
+  
+
+  
+</body>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="components/bxslider/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="components/foundation/js/foundation.min.js"></script>
+<script type="text/javascript" src="components/angular/angular.js"></script>
+<script type="text/javascript">
+ 
+ 
+ function Get_journal_entries(){
+   
+   
+ }
+ 
+ function GET_partners($http){
+      return{
+        
+      } 
+ }
+
+ 
+ 
+ angular.module('app', [])
+ .service('Get_journal_entries', [Get_journal_entries])
+ .service('GET_partners', ['$http',GET_partners]);
+  	
+  	
+  	
+  	
+  	
+  	
+  $(document).ready(function(){
+  	
+  	
+ 
+
+    $(document).foundation();
+    
+
+    
+
+  
+  });
+  
+  
+</script>
+</html>
