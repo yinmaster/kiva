@@ -17,12 +17,19 @@
        var self = this;
       self.data;
       self.countryList = [];
-      self.selectedCountry;
-      self.favoriteCountry;
-       
+      if(amplify.store("country").country){
+         self.selectedCountry = amplify.store("country").country; 
+         self.favoriteCountry = amplify.store("country").country;  
+      }else{
+         self.selectedCountry; 
+         self.favoriteCountry;
+      }
+      
+    
        $scope.fav = function(value){
          self.favoriteCountry = value.country
          self.selectedCountry = value.country;
+         amplify.store("country",{'country' : value.country});
        }
        
        $scope.selectCountry = function(value){
