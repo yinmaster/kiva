@@ -1,4 +1,4 @@
-   
+
     // GET PARTNERS FROM API  
    function GET_partners($http, $q) {
        var self = this;
@@ -20,7 +20,7 @@
       self.data;
       self.countryList = [];
       // CHECK IF COUNTRY HAS FAVIORTE IN LOCAL STORAGE AND SET IF FAVORITE EXISITS 
-      if(amplify.store("country").country){
+      if(amplify.store("country")){
          self.selectedCountry = amplify.store("country").country; 
          self.favoriteCountry = amplify.store("country").country;  
       }else{
