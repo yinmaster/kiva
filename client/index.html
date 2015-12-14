@@ -7,7 +7,7 @@
   </style>
   
 </head>
-<body>
+<body ng-controller="PartnersCtrl as partner">
 	
 {{1+4}}
     
@@ -33,34 +33,42 @@
    
  }
  
- function GET_partners($http){
-      return{
-        
-      } 
- }
+   function GET_partners($http, $q) {
+    var self = this;
+    var cNum = 1;
+    
+    self.selectedArray = [];
+    self.partnerList = {cl:[]};
+    self.getPartnersP = $q.defer();
+    
+    self.getPartners = function() {
+      $http.get('https://api.kivaws.org/v1/partners.json').
+      success(function(data, status, headers, config) {
+        self.getPartnersP.resolve(data);
+      }).
+      error(function(data, status, headers, config) {});
+    };
+    return self;
+  }
+ 
+function PartnersCtrl(GET_partners){
+    GET_partners.getPartners();
+    GET_partners.getPartnersP.promise.then(function(data){
+        alert(data)
+    })
+}
 
  
  
  angular.module('app', [])
  .service('Get_journal_entries', [Get_journal_entries])
- .service('GET_partners', ['$http',GET_partners]);
-  	
-  	
-  	
+ .service('GET_partners', ['$http', '$q',GET_partners])
+ .controller('PartnersCtrl', ['GET_partners', PartnersCtrl]);
   	
   	
   	
   $(document).ready(function(){
-  	
-  	
- 
-
     $(document).foundation();
-    
-
-    
-
-  
   });
   
   
