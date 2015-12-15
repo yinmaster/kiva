@@ -1,0 +1,55 @@
+<html ng-app="app">
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="css/app.css" type="text/css" />
+
+    <style type="text/css">
+
+    </style>
+
+</head>
+
+<body ng-controller="PartnersCtrl as partners" ng-init="parentIndex = $index">
+    <div class="row">
+        <div class="small-3 columns">
+            <!--Country Selectors-->
+            <form>
+                <ul class="side-nav">
+
+                    <li class="row" ng-repeat="country in partners.countryList | orderBy: country">
+                        <!--Select Favorite Country-->
+                        <label for="{{country}}">
+                            Fav:
+                            <input type="radio" id="{{country}}" name="country" value="{{country}}" ng-model="partners.favoriteCountry" ng-change="fav(this)">
+                        </label>
+                        <!--Select Country-->
+                        <input type="submit" name="{{country}}" value="{{country}}" class="button" ng-model="partners.selectedCountry" ng-click="selectCountry(this)" />
+                    </li>
+        </div>
+        </form>
+        </ul>
+        <!-- List of Partners-->
+        <ul class="small-8 columns">
+            <li class="panel" ng-repeat="partner in partners.data | filter: partners.selectedCountry : true">
+                <strong>Partner Name:</strong> {{partner.name}}
+                <ul>
+                    Countries of Opporation:
+                    <li ng-repeat="country in partner.countries">
+                        {{ country.name }}
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</body>
+
+<script type="text/javascript" src="js/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery/dist/jquery.min.map"></script>
+<script type="text/javascript" src="components/foundation/js/foundation.min.js"></script>
+<script type="text/javascript" src="components/angular/angular.js"></script>
+<script type="text/javascript" src="js/lodash/lodash.js"></script>
+<script type="text/javascript" src="js/amplify/lib/amplify.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+
+</html>
