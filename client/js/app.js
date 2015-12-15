@@ -57,7 +57,7 @@
                }
                return countries
            }
-
+            // ONLY SHOW UNIQUE NAMES
            self.countryList = _.uniq(getCountries());
        })
    }
